@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#15171c">
+<title>海外バイヤー顧客リスト</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%239b1c31'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='white' font-family='serif'%3E%E5%92%8C%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&display=swap">
+<style>
+  /* 版面：深墨色主视觉（品牌、标题、5 个大数字）→ 吸顶筛选条 → 列表（电脑是表格，手机是卡片）。和牛红是唯一强调色。 */
+  :root {
+    --bg: #f6f5f2; --panel: #ffffff; --ink: #16181d; --ink-2: #474c56; --muted: #878c96; --line: #e7e4df;
+    --accent: #9b1c31; --accent-ink: #ffffff; --accent-soft: #f7e8eb; --ok: #23704a; --ok-soft: #e4f2ea; --warn-soft: #f6efe1;
+    --hero: #15171c; --hero-2: #1f222a; --hero-ink: #f5f2ed; --hero-muted: #a8a49c; --hero-line: #2e313a;
+    --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "Songti SC", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "PingFang SC", "Yu Gothic", "Segoe UI", sans-serif;
+    --r: 12px; --shadow: 0 1px 2px rgba(22, 24, 29, .05), 0 10px 30px rgba(22, 24, 29, .07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101114; --panel: #191b1f; --ink: #eeebe6; --ink-2: #c8c4bc; --muted: #8e8a83; --line: #2a2d33;
+      --accent: #e46d81; --accent-ink: #15171c; --accent-soft: #3a2026; --ok: #72c799; --ok-soft: #1c3127; --warn-soft: #33291a;
+      --hero: #0b0c0e; --hero-2: #14161a; --hero-line: #24272d; --shadow: none; color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.65 var(--sans); }
+  .wrap { max-width: 1240px; margin: 0 auto;
+          padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+  button, input, select { font: inherit; color: inherit; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- 品牌 ---------- */
+  .mark { width: 34px; height: 34px; border-radius: 9px; background: var(--accent); color: #fff; display: grid; place-items: center;
+          font-family: var(--serif); font-size: 19px; flex: none; }
+  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .brand-name { font-family: var(--serif); font-size: 17px; letter-spacing: .06em; line-height: 1.25; }
+  .brand-sub { font-size: 11px; letter-spacing: .12em; color: var(--hero-muted); }
+  .hbtn { border: 1px solid var(--hero-line); background: transparent; color: var(--hero-ink); border-radius: 999px;
+          padding: 5px 14px; font-size: 12px; cursor: pointer; white-space: nowrap; flex: none; }
+  .brand > div:last-child { min-width: 0; }
+  .brand-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hbtn:hover { background: var(--hero-2); }
+
+  /* ---------- 密码页 ---------- */
+  .gate { min-height: 100vh; min-height: 100dvh; background: radial-gradient(1200px 600px at 80% -10%, #3a1820 0%, transparent 60%), var(--hero);
+          color: var(--hero-ink); display: grid; place-items: center; padding: 24px; }
+  .gate-card { width: min(420px, 100%); display: grid; gap: 18px; }
+  .gate h1 { font-family: var(--serif); font-weight: 500; font-size: 26px; margin: 8px 0 0; letter-spacing: .04em; }
+  .gate p { margin: 0; color: var(--hero-muted); }
+  .gate input { width: 100%; padding: 13px 16px; border-radius: 10px; border: 1px solid var(--hero-line); background: var(--hero-2);
+                color: var(--hero-ink); font-size: 16px; }
+  .gate .go { padding: 13px 16px; border-radius: 10px; border: 0; background: var(--accent); color: #fff; font-weight: 600; font-size: 15px; cursor: pointer; }
+  .gate .go:hover { filter: brightness(1.08); }
+  .gate .err { min-height: 1.4em; color: #f19aa8; font-size: 13px; }
+  .gate .lang-row { display: flex; justify-content: space-between; align-items: center; }
+
+  /* ---------- 主视觉 ---------- */
+  .hero { background: radial-gradient(1000px 500px at 90% -20%, #3a1820 0%, transparent 60%), var(--hero); color: var(--hero-ink); }
+  .hero .bar { display: flex; align-items: center; gap: 12px; padding-block: 16px; }
+  .hero .bar .spacer { flex: 1; }
+  .hero .intro { padding-block: 22px 8px; }
+  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 4.2vw, 40px); line-height: 1.25; margin: 0 0 10px;
+             letter-spacing: .03em; text-wrap: balance; }
+  .hero .take { margin: 0; max-width: 46em; color: var(--hero-muted); font-size: 15px; }
+  .hero .take b { color: var(--hero-ink); font-weight: 600; }
+  .kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin-top: 26px; border-top: 1px solid var(--hero-line); }
+  .kpi { padding: 18px 18px 22px 0; }
+  .kpi + .kpi { padding-left: 18px; border-left: 1px solid var(--hero-line); }
+  .kpi .v { font-family: var(--serif); font-size: clamp(26px, 3.4vw, 38px); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .kpi .k { font-size: 12px; color: var(--hero-muted); margin-top: 6px; }
+  .kpi.accent .v { color: #f0a4b0; }
+
+  /* ---------- 筛选条（吸顶） ---------- */
+  .fbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent);
+          backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line);
+          padding-top: env(safe-area-inset-top, 0px); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-block: 12px; }
+  .search { position: relative; flex: 1 1 280px; min-width: 0; }
+  .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--muted); }
+  .search input { width: 100%; padding: 9px 12px 9px 36px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); font-size: 14px; }
+  .sel { padding: 8px 30px 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); max-width: 100%; min-width: 0;
+         appearance: none; -webkit-appearance: none; font-size: 13px;
+         background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+         background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+  .chip { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .reset { border: 0; background: none; color: var(--muted); font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- 列表 ---------- */
+  main.wrap { padding-block: 20px 56px; }
+  .list-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .list-head h2 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: 22px; letter-spacing: .03em; }
+  .list-head .count { color: var(--ink-2); }
+  .list-head .count b { font-variant-numeric: tabular-nums; }
+  .list-head .hint { color: var(--muted); font-size: 12px; margin-left: auto; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
+  thead th:first-child { border-top-left-radius: var(--r); }
+  thead th:last-child { border-top-right-radius: var(--r); }
+  td.c-mail { min-width: 13rem; }
+  td.c-mail .em { overflow-wrap: anywhere; word-break: normal; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { text-align: left; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: .04em; padding: 12px 14px;
+             border-bottom: 1px solid var(--line); background: var(--panel); position: sticky; top: var(--fbar-h, 64px); z-index: 2;
+             white-space: nowrap; cursor: pointer; user-select: none; }
+  thead th[aria-sort=descending]::after { content: " ↓"; color: var(--accent); }
+  thead th[aria-sort=ascending]::after { content: " ↑"; color: var(--accent); }
+  tbody td { padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+  .score { display: inline-grid; place-items: center; min-width: 40px; height: 26px; padding: 0 8px; border-radius: 999px; font-weight: 700;
+           font-size: 13px; font-variant-numeric: tabular-nums; background: var(--line); color: var(--ink-2); }
+  .score.s-hi { background: var(--accent); color: var(--accent-ink); }
+  .score.s-mid { background: var(--accent-soft); color: var(--accent); }
+  .co { font-weight: 600; font-size: 14px; line-height: 1.4; }
+  .site { font-size: 12px; color: var(--muted); }
+  .site a { color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .tag { font-size: 11px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+  .sub { font-size: 12px; color: var(--muted); }
+  .em { word-break: break-all; }
+  .sal { color: var(--ink-2); font-size: 13px; }
+  .status { display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--line); color: var(--ink-2); white-space: nowrap; }
+  .status.st-go { background: var(--accent-soft); color: var(--accent); }
+  .status.st-won { background: var(--ok-soft); color: var(--ok); }
+  .status.st-sent { background: var(--warn-soft); color: var(--ink-2); }
+  .empty { padding: 48px 16px; text-align: center; color: var(--muted); }
+
+  /* 手机：卡片 */
+  .cards { display: grid; gap: 12px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 16px; display: grid; gap: 10px; }
+  .card-top { display: flex; gap: 12px; align-items: flex-start; }
+  .card-top .co { font-size: 16px; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 13px; }
+  .kv dt { color: var(--muted); white-space: nowrap; }
+  .kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .card-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-top: 10px; border-top: 1px dashed var(--line); }
+
+  .more { display: block; margin: 18px auto 0; padding: 11px 26px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel);
+          cursor: pointer; font-weight: 600; box-shadow: var(--shadow); }
+  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+
+  @media (max-width: 900px) {
+    .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .kpi:nth-child(4) { padding-left: 0; border-left: 0; }
+    .kpi:nth-child(n+4) { border-top: 1px solid var(--hero-line); }
+  }
+  @media (max-width: 760px) {
+    .hero .intro { padding-top: 10px; }
+    .hero .take { font-size: 14px; }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpi, .kpi + .kpi { padding: 14px 12px 16px 0; border-left: 0; }
+    .kpi:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--hero-line); }
+    .kpi:nth-child(n+3) { border-top: 1px solid var(--hero-line); }
+    .kpi:last-child { grid-column: 1 / -1; }
+    .brand-sub { display: none; }
+    .brand-name { font-size: 15px; }
+    .hero .bar { gap: 8px; }
+    .hbtn { padding: 5px 11px; }
+    .filters { gap: 6px; }
+    .search { flex-basis: 100%; }
+    .sel { flex: 1 1 calc(50% - 6px); }
+    .chips { display: flex; gap: 6px; overflow-x: auto; flex: 1 1 100%; padding-bottom: 2px; scrollbar-width: none; }
+    .chips::-webkit-scrollbar { display: none; }
+    .list-head .hint { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card, tbody tr { animation: rise .28s ease-out both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* ---------- 表示切替（顧客リスト / 輸出規制） ---------- */
+  .views { display: flex; gap: 6px; padding-bottom: 8px; }
+  .views button { border: 1px solid var(--hero-line); background: transparent; color: var(--hero-muted); border-radius: 999px;
+                  padding: 6px 16px; font-size: 13px; cursor: pointer; position: relative; white-space: nowrap; }
+  .views button[aria-pressed=true] { background: var(--hero-ink); color: var(--hero); border-color: var(--hero-ink); font-weight: 600; }
+  .views .dot { position: absolute; top: 1px; right: 3px; width: 9px; height: 9px; border-radius: 50%; background: #ff5a6e; }
+  .rchip { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .rchip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  /* ---------- 輸出規制 ---------- */
+  .ralert { border: 2px solid var(--accent); background: var(--accent-soft); border-radius: var(--r); padding: 14px 16px; margin-bottom: 14px; }
+  .ralert h3 { margin: 0 0 6px; color: var(--accent); font-size: 15px; }
+  .al { padding: 8px 0; border-top: 1px dashed var(--line); } .al:first-of-type { border-top: 0; }
+  .diff { margin: 4px 0; padding-left: 18px; font-size: 12px; } .diff .add { color: var(--ok); } .diff .del { color: var(--accent); }
+  .rc { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); margin-bottom: 10px; overflow: hidden; }
+  .rc.flag { border: 2px solid var(--accent); } .rc.flag .rhead { background: var(--accent-soft); }
+  .rhead { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; width: 100%; padding: 13px 16px; border: 0;
+           background: transparent; text-align: left; cursor: pointer; }
+  .rhead .co { font-size: 15px; } .rhead .caret { margin-left: auto; color: var(--muted); }
+  .rb { font-size: 11px; padding: 2px 9px; border-radius: 999px; background: var(--line); color: var(--ink-2); white-space: nowrap; }
+  .rb.bad { background: var(--accent-soft); color: var(--accent); font-weight: 600; } .rb.warn { background: var(--warn-soft); color: var(--ink-2); }
+  .rb.man, .mn { background: #efe7fb; color: #5b2bb5; }
+  .rb.man { font-weight: 600; }
+  .cbody { padding: 4px 16px 16px; border-top: 1px solid var(--line); }
+  .cbody .sec { margin-top: 12px; } .cbody h4 { margin: 0 0 4px; font-size: 13px; color: var(--accent); letter-spacing: .04em; }
+  .cbody ul { margin: 4px 0; padding-left: 18px; }
+  .up { margin-top: 12px; padding: 8px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); }
+  .tw { overflow-x: auto; margin-top: 12px; }
+  .rt { font-size: 13px; } .rt th { position: static; cursor: default; } .rt td { padding: 10px; } .rt ul { margin: 0; padding-left: 16px; }
+  .fd { font-weight: 600; white-space: nowrap; }
+  .lk a { display: block; font-size: 12px; margin-bottom: 3px; overflow-wrap: anywhere; }
+  .pr { font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+  .mn { font-size: 12px; border-radius: 8px; padding: 4px 8px; margin-top: 4px; }
+  .rmodal { position: fixed; inset: 0; z-index: 50; background: rgba(10, 11, 14, .55); display: grid; place-items: center; padding: 20px; }
+  .rdialog { background: var(--panel); border-radius: 14px; width: min(560px, 100%); max-height: 86vh; overflow: auto; padding: 18px 20px;
+             box-shadow: 0 20px 60px rgba(0, 0, 0, .3); }
+  .rdialog h3 { margin: 0 0 8px; color: var(--accent); font-size: 16px; }
+  .rfoot { display: flex; justify-content: flex-end; gap: 12px; align-items: center; margin-top: 12px; }
+  .go2 { padding: 9px 18px; border-radius: 999px; border: 0; background: var(--accent); color: #fff; font-weight: 600; cursor: pointer; }
+  @media (prefers-color-scheme: dark) { .rb.man, .mn { background: #2b2140; color: #c9b3f5; } }
+  @media (max-width: 760px) {
+    .rt thead { display: none; } .rt, .rt tbody, .rt tr, .rt td { display: block; width: 100%; }
+    .rt tr { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; padding: 6px 10px; }
+    .rt td { border: 0; padding: 4px 0; } .rt td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; color: var(--muted); }
+    .views button { flex: 1; }
+  }
+
+  /* ---------- 営業マニュアル（左：目次、右：本文。印刷すると本文だけになる） ---------- */
+  .mmeta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 2px 0 22px; }
+  .mchip { border: 1px solid var(--hero-line); color: var(--hero-ink); border-radius: 999px; padding: 4px 12px; font-size: 12px; }
+  .mprint { margin-left: auto; }
+  .mlayout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 26px; align-items: start; padding: 22px 0 10px; }
+  .mtoc { position: sticky; top: 14px; max-height: calc(100vh - 28px); overflow: auto; font-size: 13px; padding: 14px 16px;
+          background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
+  .mtoc-h { font-size: 11px; letter-spacing: .12em; color: var(--muted); margin-bottom: 6px; }
+  .mtoc a { display: block; padding: 5px 0; color: var(--ink); line-height: 1.45; }
+  .mtoc a.t2 { padding: 3px 0 3px 12px; font-size: 12px; color: var(--ink-2); }
+  .mdoc { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
+          padding: 30px 38px 38px; max-width: 880px; font-size: 15px; line-height: 1.95; overflow-wrap: anywhere; }
+  .mdoc .mh1 { font-family: var(--serif); font-size: 24px; line-height: 1.45; margin: 46px 0 14px; padding-bottom: 8px;
+               border-bottom: 2px solid var(--accent); scroll-margin-top: 14px; }
+  .mdoc .mh1:first-of-type { margin-top: 0; }
+  .mdoc .mh2 { font-size: 18px; line-height: 1.5; margin: 30px 0 8px; scroll-margin-top: 14px; }
+  .mdoc .mh3 { font-size: 15px; margin: 22px 0 6px; color: var(--accent); }
+  .mdoc p { margin: 10px 0; }
+  .mdoc .ml { margin: 8px 0; padding-left: 24px; } .mdoc .ml li { margin: 4px 0; }
+  .mdoc .ml li.ck { list-style: none; margin-left: -22px; } .mdoc .ck .box { display: inline-block; width: 22px; color: var(--accent); }
+  .mdoc code { font-size: 13px; background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+  .mbox { border-radius: 10px; padding: 12px 16px; margin: 16px 0; border-left: 4px solid var(--line); background: var(--bg); }
+  .mbox > :first-child { margin-top: 0; } .mbox > :last-child { margin-bottom: 0; }
+  .mbox.point { border-left-color: var(--accent); background: var(--accent-soft); }
+  .mbox.caution { border-left-color: #c07a00; background: var(--warn-soft); }
+  .mbox.example { border-left-color: var(--ok); background: var(--ok-soft); }
+  .mbox.quiz { border-left-color: #5b2bb5; background: #efe7fb; }
+  .mbox summary { cursor: pointer; color: #5b2bb5; font-weight: 600; margin-top: 8px; }
+  .mpre { white-space: pre-wrap; font: 13px/1.75 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg);
+          border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 12px 0; }
+  .mt { font-size: 13.5px; line-height: 1.7; } .mt th { position: static; cursor: default; } .mt td, .mt th { vertical-align: top; padding: 9px 10px; }
+  .mt td:first-child { min-width: 8.5em; }      /* 1 列目（国名・団体名など）が細く折り返さないように */
+  .mcover { display: none; }
+  /* 图表：配色是 dataviz 规范里验证过的分类色（同一个国家在所有图里同一个颜色），浅色/深色各一套 */
+  .mchart { position: relative; margin: 18px 0 22px; padding: 14px 16px 12px; border: 1px solid var(--line); border-radius: 12px;
+            background: var(--panel); --c0: #b9b7b0; --c1: #2a78d6; --c2: #eb6834; --c3: #1baf7a; --c4: #eda100;
+            --c5: #e87ba4; --c6: #008300; --c7: #6250d6; --c8: #e34948; }
+  .mchart .mct { font-weight: 600; font-size: 14.5px; line-height: 1.5; } .mchart .mcu { font-size: 12px; color: var(--muted); }
+  .mlg { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); margin: 8px 0 2px; }
+  .mlg span { display: inline-flex; align-items: center; gap: 6px; }
+  .mlg i, .mtip i { display: inline-block; flex: none; } .mlg .kl, .mtip i { width: 14px; height: 2px; border-radius: 2px; }
+  .mlg .kb { width: 10px; height: 10px; border-radius: 3px; }
+  .msvg { width: 100%; height: auto; display: block; overflow: visible; touch-action: pan-y; }
+  .msvg:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+  .msvg .mg { stroke: var(--line); stroke-width: 1; } .msvg .mb { stroke: var(--muted); stroke-width: 1; opacity: .55; }
+  .msvg .mtk { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+  .msvg .mln { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .msvg .mdot { stroke: var(--panel); stroke-width: 2; } .msvg .mlab { font-size: 11.5px; fill: var(--ink-2); }
+  .msvg .mx { stroke: var(--muted); stroke-width: 1; } .msvg .dim { opacity: .35; }
+  .mtip { position: absolute; z-index: 2; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+          box-shadow: 0 6px 24px rgba(0, 0, 0, .14); padding: 8px 10px; font-size: 12px; min-width: 150px; line-height: 1.6; }
+  .mtip .ty { color: var(--muted); } .mtip .tr { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
+  .mtip b { color: var(--ink); font-variant-numeric: tabular-nums; min-width: 52px; text-align: right; }
+  .mcn { font-size: 12px; color: var(--ink-2); margin-top: 8px; line-height: 1.7; } .mcs { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+  .mtbl summary { cursor: pointer; font-size: 12.5px; color: var(--accent); margin-top: 8px; }
+  .msteps { list-style: none; padding: 0; margin: 14px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .msteps li { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13px; line-height: 1.6; }
+  .msteps .sn { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent);
+                color: var(--accent-ink); font-size: 12px; font-weight: 700; margin-right: 6px; vertical-align: 1px; }
+  .msteps li > span:not(.sn) { display: block; color: var(--ink-2); font-size: 12.5px; margin-top: 4px; }
+  .msvg .mtrk { font-size: 12px; fill: var(--ink-2); } .msvg .mspan { cursor: default; } .msvg .mspan:hover rect { opacity: .8; }
+  .msvg .mtl { font-size: 11px; fill: var(--ink); }
+  .mtbl .mt td, .mtbl .mt th { text-align: right; font-variant-numeric: tabular-nums; } .mtbl .mt td:first-child, .mtbl .mt th:first-child { text-align: left; }
+  @media (prefers-color-scheme: dark) {
+    .mbox.quiz { background: #2b2140; } .mbox summary { color: #c9b3f5; }
+    .mchart { --c0: #5c5b57; --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --c7: #9085e9; --c8: #e66767; }
+  }
+  @media (max-width: 900px) {
+    .mlayout { grid-template-columns: 1fr; gap: 14px; } .mtoc { position: static; max-height: none; }
+    .mdoc { padding: 22px 18px 26px; font-size: 14.5px; }
+  }
+  @media (max-width: 760px) {
+    .mt thead { display: none; } .mt, .mt tbody, .mt tr, .mt td { display: block; width: 100%; }
+    .mt tr { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; padding: 6px 10px; }
+    .mt td { border: 0; padding: 4px 0; } .mt td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; color: var(--muted); }
+  }
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .gate, .hero, .fbar, .mtoc, footer, #leadsMain, #regsMain, .rmodal { display: none !important; }
+    .wrap { max-width: none; padding: 0; } .mlayout { display: block; padding: 0; }
+    .mdoc { max-width: none; border: 0; box-shadow: none; padding: 0; background: #fff; font-size: 10.5pt; line-height: 1.8; }
+    .mcover { display: block; margin-bottom: 18px; } .mcover h1 { font-family: var(--serif); font-size: 22pt; margin: 0 0 6px; }
+    .mdoc .mh1 { break-before: page; } .mdoc .mh1:first-of-type { break-before: auto; }
+    .mbox, .mt tr, .mpre, .mchart { break-inside: avoid; } .mdoc a { color: #000; } .mtip { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="gate" id="gate">
+  <form class="gate-card" id="gateForm" autocomplete="off">
+    <div class="lang-row">
+      <div class="brand"><div class="mark">和</div><div><div class="brand-name" data-t="brand">海外バイヤー顧客リスト</div><div class="brand-sub" data-t="sub">JAPANESE WAGYU · JAPANESE FOOD</div></div></div>
+      <button class="hbtn js-lang" type="button">中文</button>
+    </div>
+    <h1 data-t="gateTitle">パスワードを入力してください</h1>
+    <p data-t="gateNote">このページは関係者限定です。</p>
+    <input type="password" id="pw" autocomplete="current-password" data-tp="pwPlaceholder" placeholder="パスワード" aria-label="パスワード">
+    <button class="go" type="submit" data-t="open">開く</button>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <section class="hero">
+    <div class="wrap">
+      <div class="bar">
+        <div class="brand"><div class="mark">和</div><div><div class="brand-name" data-t="brand">海外バイヤー顧客リスト</div><div class="brand-sub" data-t="sub">JAPANESE WAGYU · JAPANESE FOOD</div></div></div>
+        <div class="spacer"></div>
+        <button class="hbtn js-lang" type="button">中文</button>
+        <button class="hbtn" id="logout" type="button" data-t="logout">ログアウト</button>
+      </div>
+      <nav class="views" aria-label="表示">
+        <button type="button" data-view="leads" aria-pressed="true" data-t2="tabLeads">顧客リスト</button>
+        <button type="button" data-view="regs" aria-pressed="false"><span data-t2="tabRegs">輸出規制</span><span class="dot" id="regsDot" hidden></span></button>
+        <button type="button" data-view="manual" aria-pressed="false" id="tabManual" data-t3="tabManual" hidden>営業マニュアル</button>
+      </nav>
+      <div id="leadsIntro">
+      <div class="intro">
+        <h1 data-t="h1">海外の有望バイヤー</h1>
+        <p class="take" id="takeaway"></p>
+      </div>
+      <div class="kpis">
+        <div class="kpi accent"><div class="v" id="kLeads">—</div><div class="k" data-t="kLeads">有望顧客</div></div>
+        <div class="kpi"><div class="v" id="kEmail">—</div><div class="k" data-t="kEmail">メールあり</div></div>
+        <div class="kpi"><div class="v" id="kNamed">—</div><div class="k" data-t="kNamed">担当者名あり</div></div>
+        <div class="kpi"><div class="v" id="kBeef">—</div><div class="k" data-t="kBeef">日本産牛肉を輸入できる国の会社</div></div>
+        <div class="kpi"><div class="v" id="kCountries">—</div><div class="k" data-t="kCountries">国・地域</div></div>
+      </div>
+      </div>
+      <div id="regsIntro" hidden>
+        <div class="intro">
+          <h1 data-t2="rH1">各国の日本食品輸入規制</h1>
+          <p class="take" id="rTake"></p>
+        </div>
+        <div class="kpis">
+          <div class="kpi accent"><div class="v" id="rCountries">—</div><div class="k" data-t2="kCountries">国・地域</div></div>
+          <div class="kpi"><div class="v" id="rItems">—</div><div class="k" data-t2="kItems">規制項目</div></div>
+          <div class="kpi"><div class="v" id="rSoon">—</div><div class="k" data-t2="kSoon">施行予定の変更</div></div>
+          <div class="kpi"><div class="v" id="rMan">—</div><div class="k" data-t2="kMan">要人手確認</div></div>
+          <div class="kpi"><div class="v" id="rAlerts">—</div><div class="k" data-t2="kAlerts">新しい変更通知</div></div>
+        </div>
+      </div>
+      <div id="manualIntro" hidden>
+        <div class="intro">
+          <h1 id="mTitle">営業マニュアル</h1>
+          <p class="take" id="mTake"></p>
+        </div>
+        <div class="mmeta" id="mMeta"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fbar" id="fbar">
+    <div class="wrap filters">
+      <label class="search">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg>
+        <input type="search" id="q" data-tp="search" placeholder="会社名・サイト・担当者・メールで検索" aria-label="検索">
+      </label>
+      <select id="fCountry" class="sel" aria-label="国・地域"></select>
+      <select id="fSegment" class="sel" aria-label="業種"></select>
+      <div class="chips">
+        <button type="button" class="chip" data-f="email" aria-pressed="false" data-t="fEmail">メールあり</button>
+        <button type="button" class="chip" data-f="named" aria-pressed="false" data-t="fNamed">担当者名あり</button>
+        <button type="button" class="chip" data-f="beef" aria-pressed="false" data-t="fBeef">輸入できる国</button>
+      </div>
+      <button type="button" class="reset" id="reset" data-t="reset">リセット</button>
+    </div>
+  </div>
+
+  <div class="fbar" id="rbar" hidden>
+    <div class="wrap filters">
+      <label class="search">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg>
+        <input type="search" id="rq" data-tp2="rSearch" placeholder="国名・品目・証明書で検索" aria-label="検索">
+      </label>
+      <select id="rRegion" class="sel" aria-label="地域"></select>
+      <select id="rFood" class="sel" aria-label="品目"></select>
+      <div class="chips">
+        <button type="button" class="rchip" data-f="soon" aria-pressed="false" data-t2="fSoon">変更あり・予定あり</button>
+        <button type="button" class="rchip" data-f="relig" aria-pressed="false" data-t2="fRelig">宗教上の制限あり</button>
+        <button type="button" class="rchip" data-f="man" aria-pressed="false" data-t2="fMan">要人手確認</button>
+        <button type="button" class="rchip" data-f="cert" aria-pressed="false" data-t2="fCert">法令で認証要件あり</button>
+      </div>
+      <button type="button" class="reset" id="rReset" data-t="reset">リセット</button>
+    </div>
+  </div>
+
+  <main class="wrap" id="regsMain" hidden>
+    <div class="list-head">
+      <h2 data-t2="tabRegs">輸出規制</h2>
+      <span class="count"><b id="rCount">—</b></span>
+      <span class="hint" data-t2="hint">国名をクリックすると詳細が開きます。</span>
+    </div>
+    <div class="ralert" id="rAlertBox" hidden></div>
+    <div id="rList"></div>
+    <footer><span data-t="foot">閲覧専用です。データは約20分ごとに自動で更新されます。</span> <span id="rUpdated" class="num"></span></footer>
+  </main>
+
+  <main class="wrap" id="manualMain" hidden>
+    <div class="mlayout">
+      <nav class="mtoc" id="mToc" aria-label="目次"></nav>
+      <article class="mdoc" id="mDoc"></article>
+    </div>
+  </main>
+
+  <main class="wrap" id="leadsMain">
+    <div class="list-head">
+      <h2 data-t="listTitle">顧客一覧</h2>
+      <span class="count"><b id="matched">—</b></span>
+      <span class="hint" data-t="hint">スコアは買ってくれそうな度合い（100点満点）。見出しをクリックで並べ替え。</span>
+    </div>
+
+    <div class="panel" id="tableView">
+      <table>
+        <thead><tr>
+          <th data-k="score" tabindex="0" aria-sort="descending" data-t="cScore">スコア</th>
+          <th data-k="company" tabindex="0" data-t="cCompany">会社</th>
+          <th data-k="country" tabindex="0" data-t="cWhere">国・地域 / 業種</th>
+          <th data-k="contact" tabindex="0" data-t="cContact">担当者</th>
+          <th data-k="email" tabindex="0" data-t="cEmail">宛先メール</th>
+          <th data-k="salutation" tabindex="0" data-t="cSal">宛名</th>
+          <th data-k="status" tabindex="0" data-t="cStatus">状況</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="cards" id="cardView" hidden></div>
+
+    <button class="more" id="more" type="button" data-t="more">さらに表示</button>
+    <footer><span data-t="foot">閲覧専用です。データは約20分ごとに自動で更新されます。</span> <span data-t="updatedLabel">最終更新</span> <span id="updated" class="num">—</span></footer>
+  </main>
+</div>
+
+<div class="rmodal" id="regsModal" hidden>
+  <div class="rdialog" role="dialog" aria-modal="true">
+    <h3>⚠ <span data-t2="modal">輸出規制が変わった可能性があります</span></h3>
+    <div id="regsModalBody"></div>
+    <div class="rfoot"><button type="button" class="reset" id="regsModalLater" data-t2="later">後で見る</button>
+      <button type="button" class="go2" id="regsModalGo" data-t2="go">確認する</button></div>
+  </div>
+</div>
+
+<script>
+const ITER = 200000;
+const T = {
+  ja: {brand: "海外バイヤー顧客リスト", sub: "JAPANESE WAGYU · JAPANESE FOOD", logout: "ログアウト", gateTitle: "パスワードを入力してください",
+       gateNote: "このページは関係者限定です。", pwPlaceholder: "パスワード", open: "開く", wrong: "パスワードが違います。", loading: "読み込み中…",
+       h1: "海外の有望バイヤー",
+       take: (a, b, c) => `日本和牛・日本食品を売り込める海外の有望顧客は <b>${a}</b> 社。そのうちメールアドレスがわかる会社が <b>${b}</b> 社、担当者の名前までわかる会社が <b>${c}</b> 社です。`,
+       kLeads: "有望顧客", kEmail: "メールあり", kNamed: "担当者名あり", kBeef: "日本産牛肉を輸入できる国の会社", kCountries: "国・地域",
+       search: "会社名・サイト・担当者・メールで検索", allCountries: "国・地域：すべて", allSegments: "業種：すべて",
+       fEmail: "メールあり", fNamed: "担当者名あり", fBeef: "輸入できる国", reset: "リセット",
+       listTitle: "顧客一覧", count: (n) => `${n} 社`, hint: "スコアは買ってくれそうな度合い（100点満点）。見出しをクリックで並べ替え。",
+       cScore: "スコア", cCompany: "会社", cWhere: "国・地域 / 業種", cContact: "担当者", cEmail: "宛先メール", cSal: "宛名", cStatus: "状況",
+       lContact: "担当者", lEmail: "メール", lSal: "宛名", lSite: "サイト", none: "—", noMatch: "条件に合う会社はありません。",
+       more: "さらに表示", foot: "閲覧専用です。データは約20分ごとに自動で更新されます。", updatedLabel: "最終更新", other: "中文"},
+  zh: {brand: "海外买家客户名单", sub: "JAPANESE WAGYU · JAPANESE FOOD", logout: "退出", gateTitle: "请输入密码",
+       gateNote: "本页面仅限内部人员查看。", pwPlaceholder: "密码", open: "打开", wrong: "密码不对。", loading: "加载中…",
+       h1: "海外潜在买家",
+       take: (a, b, c) => `可以推销日本和牛和日本食品的海外潜在客户共 <b>${a}</b> 家，其中有邮箱的 <b>${b}</b> 家，知道负责人名字的 <b>${c}</b> 家。`,
+       kLeads: "潜在客户", kEmail: "有邮箱", kNamed: "有负责人名字", kBeef: "可进口日本牛肉国家的公司", kCountries: "国家/地区",
+       search: "搜索公司名、网站、负责人、邮箱", allCountries: "国家/地区：全部", allSegments: "类型：全部",
+       fEmail: "有邮箱", fNamed: "有负责人名字", fBeef: "可进口的国家", reset: "清除条件",
+       listTitle: "客户列表", count: (n) => `${n} 家`, hint: "评分越高越可能成交（满分100）。点表头可以换排序。",
+       cScore: "评分", cCompany: "公司", cWhere: "国家/地区 / 类型", cContact: "负责人", cEmail: "收件邮箱", cSal: "称呼", cStatus: "状态",
+       lContact: "负责人", lEmail: "邮箱", lSal: "称呼", lSite: "网站", none: "—", noMatch: "没有符合条件的公司。",
+       more: "再显示更多", foot: "只读页面，数据大约每 20 分钟自动更新。", updatedLabel: "最后更新", other: "日本語"},
+};
+let lang = "ja";
+try { lang = localStorage.getItem("lang") === "zh" ? "zh" : "ja"; } catch (e) {}
+const L = () => T[lang];
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+const fmt = (n) => Number(n).toLocaleString("en-US");
+const mobile = window.matchMedia("(max-width: 760px)");
+const S = {rows: [], q: "", country: "", segment: "", email: false, named: false, beef: false, sort: "score", dir: -1, limit: 120};
+const F = (k) => (lang === "zh" && ["country", "segment", "beef", "status", "tags"].includes(k) ? k + "_zh" : k);
+const STATUS = {go: ["返信あり", "商談中"], won: ["成約"], sent: ["メール送信済み"]};
+
+function applyText() {
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "ja";
+  document.title = L().brand;
+  $$("[data-t]").forEach((el) => { const v = L()[el.dataset.t]; if (typeof v === "string") el.textContent = v; });
+  $$("[data-tp]").forEach((el) => { el.placeholder = L()[el.dataset.tp]; });
+  $$(".js-lang").forEach((b) => { b.textContent = L().other; });
+  if (typeof RT !== "undefined") {            // 輸出規制ページの文言
+    $$("[data-t2]").forEach((el) => { const v = RT[lang][el.dataset.t2]; if (typeof v === "string") el.textContent = v; });
+    $$("[data-tp2]").forEach((el) => { el.placeholder = RT[lang][el.dataset.tp2]; });
+  }
+  if (typeof MT !== "undefined") {            // 営業マニュアルの文言
+    $$("[data-t3]").forEach((el) => { const v = MT[lang][el.dataset.t3]; if (typeof v === "string") el.textContent = v; });
+  }
+}
+
+async function decrypt(buf, password) {
+  const b = new Uint8Array(buf);
+  if (new TextDecoder().decode(b.slice(0, 8)) !== "Salted__") throw new Error("format");
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = new Uint8Array(await crypto.subtle.deriveBits({name: "PBKDF2", salt: b.slice(8, 16), iterations: ITER, hash: "SHA-256"}, base, 384));
+  const key = await crypto.subtle.importKey("raw", bits.slice(0, 32), "AES-CBC", false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({name: "AES-CBC", iv: bits.slice(32, 48)}, key, b.slice(16));
+  const text = await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+  return JSON.parse(text);
+}
+
+async function unlock(password) {
+  $("#err").textContent = L().loading;
+  try {
+    const res = await fetch("data.bin?v=" + Date.now(), {cache: "no-store"});
+    const data = await decrypt(await res.arrayBuffer(), password);
+    try { sessionStorage.setItem("pw", password); } catch (e) {}
+    S.rows = data.rows; S.updated = data.updated;
+    $("#gate").hidden = true; $("#app").hidden = false; $("#err").textContent = "";
+    render();
+    loadRegs(password);                         // 各国規制（regs.bin）も同じパスワードで復号
+    loadManual(password);                       // 営業マニュアル（manual.bin）も同じパスワードで復号
+    let v = "leads";
+    try { v = localStorage.getItem("view") || "leads"; } catch (e) {}
+    if (v === "regs" || v === "manual") showView(v);
+  } catch (e) {
+    $("#err").textContent = L().wrong;
+    try { sessionStorage.removeItem("pw"); } catch (e2) {}
+  }
+}
+
+function matches() {
+  const q = S.q.trim().toLowerCase();
+  const out = S.rows.filter((r) => (!S.country || r[F("country")] === S.country) && (!S.segment || r[F("segment")] === S.segment)
+    && (!S.email || r.email) && (!S.named || r.contact) && (!S.beef || r.beef === "輸出可")
+    && (!q || [r.company, r.domain, r.contact, r.email, r.title].some((v) => String(v || "").toLowerCase().includes(q))));
+  const k = F(S.sort);
+  return out.sort((a, b) => (typeof a[k] === "number" ? a[k] - b[k] : String(a[k] || "").localeCompare(String(b[k] || ""), lang)) * S.dir);
+}
+
+function fillSelect(sel, key, allText, current) {
+  const n = {};
+  for (const r of S.rows) n[r[F(key)]] = (n[r[F(key)]] || 0) + 1;
+  sel.replaceChildren(new Option(allText, ""), ...Object.entries(n).sort((a, b) => b[1] - a[1]).map(([v, c]) => new Option(`${v}（${fmt(c)}）`, v)));
+  sel.value = current;
+}
+
+function render() {
+  applyText();
+  const R = S.rows;
+  const e = R.filter((r) => r.email).length, c = R.filter((r) => r.contact).length;
+  $("#kLeads").textContent = fmt(R.length); $("#kEmail").textContent = fmt(e); $("#kNamed").textContent = fmt(c);
+  $("#kBeef").textContent = fmt(R.filter((r) => r.beef === "輸出可").length);
+  $("#kCountries").textContent = fmt(new Set(R.map((r) => r.country)).size);
+  $("#takeaway").innerHTML = L().take(fmt(R.length), fmt(e), fmt(c));     // 只含数字，没有外部文字
+  $("#updated").textContent = (S.updated || "").replace("T", " ").slice(0, 16);
+  fillSelect($("#fCountry"), "country", L().allCountries, S.country);
+  fillSelect($("#fSegment"), "segment", L().allSegments, S.segment);
+  draw();
+}
+
+const el = (tag, cls, text) => { const x = document.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; };
+function scoreBadge(s) { return el("span", "score " + (s >= 80 ? "s-hi" : s >= 60 ? "s-mid" : ""), String(s)); }
+function statusChip(r) {
+  const v = r.status || "";
+  const cls = STATUS.won.includes(v) ? "st-won" : STATUS.go.includes(v) ? "st-go" : STATUS.sent.includes(v) ? "st-sent" : "";
+  return el("span", "status " + cls, r[F("status")] || "");
+}
+function tagsOf(r) {
+  const box = el("div", "tags");
+  for (const t of String(r[F("tags")] || "").split("、").filter(Boolean).slice(0, 3)) box.append(el("span", "tag", t));
+  return box;
+}
+function siteLink(r) {
+  if (!/^https?:\/\//.test(r.website || "")) return el("span", "site", r.domain);
+  const a = el("a", "", r.domain + " ↗"); a.href = r.website; a.target = "_blank"; a.rel = "noopener noreferrer";
+  const s = el("div", "site"); s.append(a); return s;
+}
+function mail(r) {
+  if (!r.email) return el("span", "sub", L().none);
+  const a = el("a", "em", r.email); a.href = "mailto:" + r.email; return a;
+}
+
+function draw() {
+  const list = matches();
+  $("#matched").textContent = L().count(fmt(list.length));
+  const show = list.slice(0, S.limit);
+  const useCards = mobile.matches;
+  $("#tableView").hidden = useCards; $("#cardView").hidden = !useCards;
+  if (useCards) {
+    const box = $("#cardView");
+    box.replaceChildren();
+    if (!show.length) box.append(el("div", "empty", L().noMatch));
+    for (const r of show) {
+      const card = el("article", "card");
+      const top = el("div", "card-top");
+      const head = el("div");
+      head.append(el("div", "co", r.company || r.domain), el("div", "sub", [r[F("country")], r[F("segment")]].filter(Boolean).join(" · ")));
+      top.append(scoreBadge(r.score), head);
+      card.append(top);
+      if (r[F("tags")]) card.append(tagsOf(r));
+      const kv = el("dl", "kv");
+      const add = (k, v) => { kv.append(el("dt", "", k)); const dd = el("dd"); dd.append(v); kv.append(dd); };
+      const who = el("span"); who.append(document.createTextNode(r.contact || L().none));
+      if (r.title) who.append(el("span", "sub", "　" + r.title));
+      add(L().lContact, who);
+      add(L().lEmail, mail(r));
+      if (r.salutation) add(L().lSal, el("span", "sal", r.salutation));
+      card.append(kv);
+      const foot = el("div", "card-foot");
+      foot.append(siteLink(r), statusChip(r));
+      card.append(foot);
+      box.append(card);
+    }
+  } else {
+    const tb = $("#rows");
+    tb.replaceChildren();
+    if (!show.length) { const tr = el("tr"); const td = el("td", "empty", L().noMatch); td.colSpan = 7; tr.append(td); tb.append(tr); }
+    for (const r of show) {
+      const tr = el("tr");
+      const c1 = el("td"); c1.append(scoreBadge(r.score));
+      const c2 = el("td"); c2.append(el("div", "co", r.company || r.domain), siteLink(r)); if (r[F("tags")]) c2.append(tagsOf(r));
+      const c3 = el("td"); c3.append(el("div", "", r[F("country")] || ""), el("div", "sub", r[F("segment")] || ""));
+      const c4 = el("td"); c4.append(el("div", "", r.contact || L().none)); if (r.title) c4.append(el("div", "sub", r.title));
+      const c5 = el("td", "c-mail"); c5.append(mail(r));
+      const c6 = el("td", "sal", r.salutation || "");
+      const c7 = el("td"); c7.append(statusChip(r));
+      tr.append(c1, c2, c3, c4, c5, c6, c7);
+      tb.append(tr);
+    }
+  }
+  $("#more").hidden = list.length <= S.limit;
+  document.documentElement.style.setProperty("--fbar-h", $("#fbar").offsetHeight + "px");
+}
+
+function refilter() { S.limit = 120; draw(); }
+$("#gateForm").addEventListener("submit", (ev) => { ev.preventDefault(); unlock($("#pw").value); });
+$("#logout").addEventListener("click", () => { try { sessionStorage.removeItem("pw"); } catch (e) {} location.reload(); });
+$$(".js-lang").forEach((b) => b.addEventListener("click", () => {
+  lang = lang === "ja" ? "zh" : "ja";
+  try { localStorage.setItem("lang", lang); } catch (e) {}
+  S.country = ""; S.segment = "";
+  if (S.rows.length) (R2.view === "regs" ? renderRegs() : R2.view === "manual" ? renderManual() : render()); else applyText();
+}));
+$("#q").addEventListener("input", (ev) => { S.q = ev.target.value; refilter(); });
+$("#fCountry").addEventListener("change", (ev) => { S.country = ev.target.value; refilter(); });
+$("#fSegment").addEventListener("change", (ev) => { S.segment = ev.target.value; refilter(); });
+$$(".chip").forEach((b) => b.addEventListener("click", () => {
+  const k = b.dataset.f; S[k] = !S[k]; b.setAttribute("aria-pressed", String(S[k])); refilter();
+}));
+$("#more").addEventListener("click", () => { S.limit += 300; draw(); });
+$("#reset").addEventListener("click", () => {
+  Object.assign(S, {q: "", country: "", segment: "", email: false, named: false, beef: false, sort: "score", dir: -1, limit: 120});
+  $("#q").value = "";
+  $$(".chip").forEach((b) => b.setAttribute("aria-pressed", "false"));
+  $$("thead th").forEach((th) => th.removeAttribute("aria-sort"));
+  $('thead th[data-k="score"]').setAttribute("aria-sort", "descending");
+  render();
+});
+$$("thead th").forEach((th) => {
+  const go = () => {
+    const k = th.dataset.k;
+    if (S.sort === k) S.dir = -S.dir; else { S.sort = k; S.dir = k === "score" ? -1 : 1; }
+    $$("thead th").forEach((o) => o.removeAttribute("aria-sort"));
+    th.setAttribute("aria-sort", S.dir < 0 ? "descending" : "ascending");
+    draw();
+  };
+  th.addEventListener("click", go);
+  th.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
+});
+mobile.addEventListener("change", () => { if (S.rows.length) draw(); });
+window.addEventListener("resize", () => document.documentElement.style.setProperty("--fbar-h", $("#fbar").offsetHeight + "px"));
+
+/* ---------- 輸出規制：各国の日本食品輸入規制・宗教上の注意（regs.bin、同じパスワードで復号） ---------- */
+const RT = {
+  ja: {tabLeads: "顧客リスト", tabRegs: "輸出規制", rH1: "各国の日本食品輸入規制",
+       rTake: (a, b, c) => `<b>${a}</b> か国・地域の規制を、国 → 品目 → 必要な証明書・許可 → 要点 → 公式リンクの順にまとめています。施行予定の変更 <b>${b}</b> 件、要人手確認 <b>${c}</b> 件。公式ページは毎日確認し、変更があれば赤で表示します。`,
+       kCountries: "国・地域", kItems: "規制項目", kSoon: "施行予定の変更", kMan: "要人手確認", kAlerts: "新しい変更通知",
+       rSearch: "国名・品目・証明書で検索", allRegion: "地域：すべて", allFood: "品目：すべて",
+       fSoon: "変更あり・予定あり", fRelig: "宗教上の制限あり", fMan: "要人手確認", fCert: "法令で認証要件あり",
+       general: "共通の要件", religion: "宗教上の注意", upcoming: "施行予定の変更", food: "品目", status: "可否",
+       certs: "食品安全認証（HACCP / ISO 22000 / FSSC 22000 など）", other: "食品以外の証明・要件", applies: "適用範囲", nori: "乾海苔",
+       related: "関連する要件", otherType: "分類", otherName: "証明・要件", otherWho: "手続き", certNeed: "認証：証明書が必要", certSys: "認証：体制が必要",
+       docs: "必要な証明書", permits: "許可・登録・認定", summary: "規制の要点", links: "詳細リンク", practice: "実務",
+       conf: "確度", manual: "要人手確認", none: "該当する国はありません。", count: (n) => `${n} か国・地域`,
+       alertTitle: (n) => `${n} 件の新しい通知：規制が変わった可能性があります`, dismiss: "非表示にする", open: "元のページを開く",
+       added: "追加", removed: "削除", minor: "ページの軽微な更新", soon: "変更予定", changed: "規制変更の可能性",
+       future: "将来の施行に言及", later: "後で見る", go: "確認する", modal: "輸出規制が変わった可能性があります",
+       lastRun: "公式ページの前回確認", hint: "国名をクリックすると詳細が開きます。",
+       pork: ["豚肉禁止", "豚肉に制限"], alcohol: ["酒類禁止", "酒類に制限"], beef: ["牛肉禁止", "牛肉に制限"], halal: "ハラール", kosher: "コーシャ",
+       loading: "読み込み中…", nodata: "規制データはまだありません。"},
+  zh: {tabLeads: "客户名单", tabRegs: "出口规制", rH1: "各国进口日本食品的规定",
+       rTake: (a, b, c) => `共 <b>${a}</b> 个国家/地区，按「国家 → 食品 → 需要的证明书和许可 → 规定要点 → 官方链接」整理。即将生效的变化 <b>${b}</b> 项，需要人工确认 <b>${c}</b> 条。官方网页每天核对一次，有变化会标红。`,
+       kCountries: "国家/地区", kItems: "规定条目", kSoon: "即将生效的变化", kMan: "需要人工确认", kAlerts: "新的变化提醒",
+       rSearch: "搜索国家、食品、证明书", allRegion: "地区：全部", allFood: "食品：全部",
+       fSoon: "有变化或即将变化", fRelig: "有宗教限制", fMan: "需要人工确认", fCert: "法律要求认证",
+       general: "通用要求", religion: "宗教方面", upcoming: "即将生效的变化", food: "食品", status: "状态",
+       certs: "食品安全认证（HACCP / ISO 22000 / FSSC 22000 等）", other: "食品以外的证明和要求", applies: "适用范围", nori: "干海苔",
+       related: "相关要求", otherType: "类别", otherName: "证明或要求", otherWho: "由谁办理", certNeed: "认证：要证书", certSys: "认证：要体系",
+       docs: "需要的证明书", permits: "证照 / 许可 / 注册", summary: "规定要点", links: "详细政策", practice: "实际操作",
+       conf: "可信度", manual: "需要人工确认", none: "没有符合条件的国家。", count: (n) => `${n} 个国家/地区`,
+       alertTitle: (n) => `${n} 个新提醒：规定可能有变化`, dismiss: "不再显示", open: "打开原网页",
+       added: "新增", removed: "删除", minor: "网页小改动", soon: "即将变化", changed: "规定可能有变",
+       future: "提到将来生效", later: "稍后再看", go: "去看看", modal: "出口规定可能有变化",
+       lastRun: "官方网页上次核对", hint: "点国家名可以展开详细内容。",
+       pork: ["禁止猪肉", "猪肉有限制"], alcohol: ["禁止酒类", "酒类有限制"], beef: ["禁止牛肉", "牛肉有限制"], halal: "清真证书", kosher: "洁食证书",
+       loading: "加载中…", nodata: "还没有规定数据。"},
+};
+const RL2 = () => RT[lang];
+const JA2 = () => lang === "ja";
+const FOOD_JA2 = {"牛肉": "牛肉", "猪肉": "豚肉", "禽肉·蛋": "鶏肉・卵", "乳制品": "乳製品", "水产品": "水産物", "大米·谷物": "米・穀物",
+  "新鲜果蔬": "青果物", "茶叶": "茶", "加工食品": "加工食品", "酒类": "酒類", "饮用水·饮料": "飲料水・飲料"};
+const REG_JA2 = {"日本": "日本", "东亚": "東アジア", "东南亚": "東南アジア", "南亚": "南アジア", "中亚": "中央アジア", "中东": "中東", "欧洲": "欧州",
+  "北美": "北米", "中南美": "中南米", "大洋洲": "オセアニア", "非洲": "アフリカ"};
+const VAL_JA2 = {"允许": "可", "禁止": "禁止", "限制": "制限あり", "不需要": "不要", "部分需要": "一部必要", "必须": "必須",
+  "合格评定": "適合性評価", "文件认证": "書類認証", "包装环保": "包装・環境", "可持续来源": "持続可能性・由来",
+  "管理体系": "マネジメントシステム", "社会责任": "社会的責任", "企业资质": "企業資格", "法定": "法定", "视情况": "条件による", "买家要求": "買い手の要求",
+  "可以出口": "輸出可", "有条件": "条件付き", "暂停或禁止": "停止・禁止", "高": "高", "中": "中", "低": "低"};
+const R2 = {data: null, open: new Set(), q: "", region: "", food: "", soon: false, relig: false, man: false, cert: false, view: "leads"};
+const esc2 = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"}[c]));
+const tr2 = (s, m) => JA2() ? String(s || "").split(/[、,，]/).map((x) => m[x.trim()] || x.trim()).join("、") : (s || "");
+const t2 = (o, k) => (o ? (JA2() ? (o[k + "_ja"] || o[k + "_zh"]) : (o[k + "_zh"] || o[k + "_ja"])) : "") || "";
+const arr2 = (o, k) => (JA2() && (o[k + "_ja"] || []).length ? o[k + "_ja"] : o[k]) || [];
+const man2 = (o) => (o ? (JA2() && o.manual_ja ? o.manual_ja : o.manual) : "") || "";
+const ul2 = (a) => { a = (a || []).filter(Boolean); return a.length ? "<ul>" + a.map((x) => `<li>${esc2(x)}</li>`).join("") + "</ul>" : "<span class='sub'>—</span>"; };
+const links2 = (ls) => (ls || []).filter((l) => l && /^https?:\/\//.test(l.url || ""))
+  .map((l) => `<a href="${esc2(l.url)}" target="_blank" rel="noopener noreferrer">${esc2(l.title || l.url)} ↗</a>`).join("");
+const seenIds = () => { try { return new Set(JSON.parse(localStorage.getItem("regsSeen") || "[]")); } catch (e) { return new Set(); } };
+const freshAlerts = () => (R2.data?.alerts || []).filter((a) => !seenIds().has(a.id));
+// 食品安全认证：「未见要求」的说明只是下一步问谁，不算待确认事项
+const manCount = (c) => (c.items || []).filter((it) => it.manual).length + (c.general?.manual ? 1 : 0) + (c.religion?.manual ? 1 : 0)
+  + (c.certs?.manual && c.certs.level !== "未见要求" ? 1 : 0) + (c.other || []).filter((x) => x.manual).length;
+const CERT_LV2 = {"法定证书": ["法律要求证书或证明", "法令で証明書が必要"], "法定体系": ["法律要求体系，不要民间证书", "法令で体制が必要（民間証明書は不要）"],
+  "买家要求": ["买家常要求", "買い手が求めることが多い"], "未见要求": ["未见要求", "要件は確認されず"], "未确认": ["未确认", "未確認"]};
+const certLegal = (c) => ["法定证书", "法定体系"].includes(c.certs?.level);
+const religious = (c) => { const r = c.religion || {}; return ["禁止", "限制"].includes(r.pork) || ["禁止", "限制"].includes(r.alcohol)
+  || ["禁止", "限制"].includes(r.beef) || ["必须", "部分需要"].includes(r.halal) || ["必须", "部分需要"].includes(r.kosher); };
+
+async function loadRegs(password) {
+  try {
+    const res = await fetch("regs.bin?v=" + Date.now(), {cache: "no-store"});
+    if (!res.ok) return;
+    R2.data = await decrypt(await res.arrayBuffer(), password);
+  } catch (e) { return; }
+  const high = freshAlerts().filter((a) => a.level === "high");
+  $("#regsDot").hidden = !high.length;
+  if (high.length) {
+    $("#regsModalBody").innerHTML = high.slice(0, 8).map((a) => alertHtml(a, false)).join("");
+    $("#regsModal").hidden = false;
+  }
+  if (R2.view === "regs") renderRegs();
+}
+
+function showView(v) {
+  R2.view = v;
+  $$(".views button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === v)));
+  for (const id of ["leadsIntro", "fbar", "leadsMain"]) $("#" + id).hidden = v !== "leads";
+  for (const id of ["regsIntro", "rbar", "regsMain"]) $("#" + id).hidden = v !== "regs";
+  for (const id of ["manualIntro", "manualMain"]) $("#" + id).hidden = v !== "manual";
+  try { localStorage.setItem("view", v); } catch (e) {}
+  if (v === "regs") renderRegs(); else if (v === "manual") renderManual(); else render();
+  window.scrollTo(0, 0);
+}
+
+function badges(c, flagged) {
+  const r = c.religion || {}, L2 = RL2(), b = [];
+  const two = (v, pair) => v === "禁止" ? `<span class="rb bad">${pair[0]}</span>` : v === "限制" ? `<span class="rb warn">${pair[1]}</span>` : "";
+  b.push(two(r.pork, L2.pork), two(r.alcohol, L2.alcohol), two(r.beef, L2.beef));
+  if (["必须", "部分需要"].includes(r.halal)) b.push(`<span class="rb warn">${L2.halal}：${esc2(tr2(r.halal, VAL_JA2))}</span>`);
+  if (["必须", "部分需要"].includes(r.kosher)) b.push(`<span class="rb warn">${L2.kosher}：${esc2(tr2(r.kosher, VAL_JA2))}</span>`);
+  if (c.certs?.level === "法定证书") b.push(`<span class="rb warn">${L2.certNeed}</span>`);
+  if (c.certs?.level === "法定体系") b.push(`<span class="rb warn">${L2.certSys}</span>`);
+  (c.upcoming || []).forEach((u) => b.push(`<span class="rb bad">${L2.soon} ${esc2(u.date || "")}</span>`));
+  if (flagged) b.push(`<span class="rb bad">⚠ ${L2.changed}</span>`);
+  const m = manCount(c);
+  if (m) b.push(`<span class="rb man">⚑ ${L2.manual} ${m}</span>`);
+  return b.join("");
+}
+
+function alertHtml(a, withBtn) {
+  const L2 = RL2(), who = ((JA2() ? a.countries_ja : a.countries) || a.countries || []).join("、");
+  const body = a.kind === "upcoming" ? `<div>${esc2(a.date || "")}：${esc2(t2(a, "summary"))}</div>`
+    : `<ul class="diff">${(a.added || []).slice(0, 4).map((x) => `<li class="add">${L2.added}：${esc2(x.slice(0, 150))}</li>`).join("")}`
+      + `${(a.removed || []).slice(0, 2).map((x) => `<li class="del">${L2.removed}：${esc2(x.slice(0, 150))}</li>`).join("")}</ul>`;
+  return `<div class="al"><b>${esc2(who)}</b> ${a.future ? `<span class="rb bad">${L2.future}</span>` : ""}${a.level === "high" ? "" : ` <span class="rb">${L2.minor}</span>`}
+    <div class="sub">${esc2(String(a.time || "").replace("T", " "))}${/^https?:/.test(a.url || "") ? ` · <a href="${esc2(a.url)}" target="_blank" rel="noopener noreferrer">${L2.open} ↗</a>` : ""}</div>
+    ${body}${withBtn ? `<button class="reset" type="button" data-seen="${esc2(a.id)}">${L2.dismiss}</button>` : ""}</div>`;
+}
+
+function body2(c, items) {
+  const L2 = RL2(), g = c.general || {}, r = c.religion || {};
+  const up = (c.upcoming || []).map((u) => `<div class="up">⚠ ${L2.upcoming}：<b>${esc2(u.date || "")}</b> ${esc2(t2(u, "summary"))}`
+    + `${/^https?:/.test(u.link || "") ? ` <a href="${esc2(u.link)}" target="_blank" rel="noopener noreferrer">${L2.open} ↗</a>` : ""}</div>`).join("");
+  const sec = (title, text, list, ls, m) => (text || (list || []).length || m)
+    ? `<div class="sec"><h4>${title}</h4>${text ? `<div>${esc2(text)}</div>` : ""}${(list || []).length ? ul2(list) : ""}<div class="lk">${links2(ls)}</div>${m ? `<div class="mn">⚑ ${esc2(m)}</div>` : ""}</div>` : "";
+  const rows = items.map((it) => `<tr>
+      <td class="fd" data-l="${L2.food}">${esc2(tr2(it.food, FOOD_JA2))}<div class="sub">${L2.conf}：${esc2(tr2(it.confidence, VAL_JA2))} · ${esc2(it.checked || "")}</div></td>
+      <td data-l="${L2.status}">${esc2(tr2(it.status, VAL_JA2))}</td>
+      <td data-l="${L2.docs}">${ul2(arr2(it, "docs"))}</td>
+      <td data-l="${L2.permits}">${ul2(arr2(it, "permits"))}</td>
+      <td data-l="${L2.summary}">${esc2(t2(it, "summary"))}${t2(it, "practice") ? `<div class="pr">${L2.practice}：${esc2(t2(it, "practice"))}</div>` : ""}${man2(it) ? `<div class="mn">⚑ ${esc2(man2(it))}</div>` : ""}</td>
+      <td class="lk" data-l="${L2.links}">${links2(it.links)}</td></tr>`).join("");
+  const x = c.certs, line = (k, v) => v ? `<div><b>${k}：</b>${esc2(v)}</div>` : "";
+  const certSec = x ? `<div class="sec"><h4>${L2.certs}</h4><div><span class="rb${certLegal(c) ? " warn" : ""}">${esc2((CERT_LV2[x.level] || [x.level, x.level])[JA2() ? 1 : 0])}</span> ${(x.schemes || []).map((s) => `<span class="rb">${esc2(s)}</span>`).join(" ")}</div>`
+    + `${line(L2.applies, t2(x, "applies"))}<div>${esc2(t2(x, "summary"))}</div>${t2(x, "practice") ? `<div class="pr">${L2.practice}：${esc2(t2(x, "practice"))}</div>` : ""}${line(L2.nori, t2(x, "nori"))}`
+    + `${(x.related || []).length ? `<div><b>${L2.related}：</b>${ul2(arr2(x, "related"))}</div>` : ""}<div class="sub">${L2.conf}：${esc2(tr2(x.confidence, VAL_JA2))} · ${esc2(x.checked || "")}</div>`
+    + `<div class="lk">${links2(x.links)}</div>${man2(x) ? `<div class="mn">⚑ ${esc2(man2(x))}</div>` : ""}</div>` : "";
+  const others = c.other || [], otherRows = others.map((o) => `<tr>
+      <td class="fd" data-l="${L2.otherType}">${esc2(tr2(o.type, VAL_JA2))}<div class="sub">${L2.conf}：${esc2(tr2(o.confidence, VAL_JA2))} · ${esc2(o.checked || "")}</div></td>
+      <td data-l="${L2.otherName}">${esc2(t2(o, "name"))}<div><span class="rb${o.level === "法定" ? " warn" : ""}">${esc2(tr2(o.level, VAL_JA2))}</span></div></td>
+      <td data-l="${L2.summary}">${esc2(t2(o, "summary"))}${line(L2.applies, t2(o, "applies"))}${line(L2.otherWho, t2(o, "who"))}${t2(o, "practice") ? `<div class="pr">${L2.practice}：${esc2(t2(o, "practice"))}</div>` : ""}${man2(o) ? `<div class="mn">⚑ ${esc2(man2(o))}</div>` : ""}</td>
+      <td class="lk" data-l="${L2.links}">${links2(o.links)}</td></tr>`).join("");
+  const otherSec = others.length ? `<details class="sec"><summary><b>${L2.other}（${others.length}）</b></summary><div class="tw"><table class="rt"><thead><tr><th>${L2.otherType}</th><th>${L2.otherName}</th><th>${L2.summary}</th><th>${L2.links}</th></tr></thead><tbody>${otherRows}</tbody></table></div></details>` : "";
+  return `<div class="cbody">${up}${sec(L2.general, t2(g, "summary"), arr2(g, "docs"), g.links, man2(g))}${sec(L2.religion, t2(r, "summary"), [], r.links, man2(r))}${certSec}
+    <div class="tw"><table class="rt"><thead><tr><th>${L2.food}</th><th>${L2.status}</th><th>${L2.docs}</th><th>${L2.permits}</th><th>${L2.summary}</th><th>${L2.links}</th></tr></thead><tbody>${rows}</tbody></table></div>${otherSec}</div>`;
+}
+
+function renderRegs() {
+  applyText();
+  const L2 = RL2();
+  $$("[data-t2]").forEach((x) => { const v = L2[x.dataset.t2]; if (typeof v === "string") x.textContent = v; });
+  $$("[data-tp2]").forEach((x) => { x.placeholder = L2[x.dataset.tp2]; });
+  const cs = R2.data?.countries || [];
+  const fresh = freshAlerts(), flagged = new Set(fresh.filter((a) => a.level === "high").flatMap((a) => a.codes || []));
+  const items = cs.flatMap((c) => c.items || []), soonN = cs.reduce((n, c) => n + (c.upcoming || []).length, 0), manN = cs.reduce((n, c) => n + manCount(c), 0);
+  $("#rCountries").textContent = fmt(cs.length); $("#rItems").textContent = fmt(items.length);
+  $("#rSoon").textContent = fmt(soonN); $("#rMan").textContent = fmt(manN); $("#rAlerts").textContent = fmt(fresh.length);
+  $("#rTake").innerHTML = L2.rTake(fmt(cs.length), fmt(soonN), fmt(manN));
+  const st = R2.data?.status || {};
+  $("#rUpdated").textContent = st.last_run ? `${L2.lastRun} ${String(st.last_run).replace("T", " ")}` : "";
+  const regs = [...new Set(cs.map((c) => c.region).filter(Boolean))];
+  $("#rRegion").replaceChildren(new Option(L2.allRegion, ""), ...regs.map((r) => new Option(JA2() ? (REG_JA2[r] || r) : r, r)));
+  $("#rRegion").value = R2.region;
+  $("#rFood").replaceChildren(new Option(L2.allFood, ""), ...Object.keys(FOOD_JA2).map((f) => new Option(JA2() ? FOOD_JA2[f] : f, f)));
+  $("#rFood").value = R2.food;
+  const box = $("#rAlertBox");
+  box.hidden = !fresh.length;
+  if (fresh.length) {
+    box.innerHTML = `<h3>⚠ ${L2.alertTitle(fresh.length)}</h3>` + fresh.slice(0, 20).map((a) => alertHtml(a, true)).join("");
+    box.querySelectorAll("[data-seen]").forEach((b) => b.onclick = () => {
+      const s = seenIds(); s.add(b.dataset.seen);
+      try { localStorage.setItem("regsSeen", JSON.stringify([...s])); } catch (e) {}
+      $("#regsDot").hidden = !freshAlerts().some((a) => a.level === "high");
+      renderRegs();
+    });
+  }
+  drawRegs(flagged);
+}
+
+function drawRegs(flagged) {
+  const L2 = RL2(), cs = R2.data?.countries || [], q = R2.q.trim().toLowerCase(), out = [];
+  if (!R2.data) { $("#rList").innerHTML = `<div class="empty">${L2.loading}</div>`; return; }
+  if (!flagged) flagged = new Set(freshAlerts().filter((a) => a.level === "high").flatMap((a) => a.codes || []));
+  for (const c of cs) {
+    const fl = flagged.has(c.code), soon = (c.upcoming || []).length > 0;
+    if ((R2.region && c.region !== R2.region) || (R2.soon && !fl && !soon) || (R2.relig && !religious(c)) || (R2.man && !manCount(c)) || (R2.cert && !certLegal(c))) continue;
+    let items = c.items || [];
+    if (R2.food) { items = items.filter((it) => String(it.food || "").includes(R2.food)); if (!items.length) continue; }
+    if (q && !JSON.stringify(c).toLowerCase().includes(q)) continue;
+    const open = R2.open.has(c.code) || !!R2.food || !!q;
+    out.push(`<article class="rc${fl ? " flag" : ""}" data-code="${esc2(c.code)}">
+      <button class="rhead" type="button" aria-expanded="${open}"><span class="co">${esc2(JA2() ? (c.name_ja || c.name_zh) : (c.name_zh || c.name_ja))}</span>`
+      + `<span class="sub">${esc2(c.code)} · ${esc2(JA2() ? (REG_JA2[c.region] || c.region || "") : (c.region || ""))}</span>${badges(c, fl)}<span class="caret">${open ? "▲" : "▼"}</span></button>`
+      + `${open ? body2(c, items) : ""}</article>`);
+  }
+  $("#rCount").textContent = L2.count(fmt(out.length));
+  $("#rList").innerHTML = out.join("") || `<div class="empty">${R2.data.countries?.length ? L2.none : L2.nodata}</div>`;
+  $$("#rList .rhead").forEach((h) => h.onclick = () => {
+    const code = h.parentElement.dataset.code;
+    R2.open.has(code) ? R2.open.delete(code) : R2.open.add(code);
+    drawRegs();
+  });
+}
+
+$$(".views button").forEach((b) => b.addEventListener("click", () => showView(b.dataset.view)));
+$("#rq").addEventListener("input", (ev) => { R2.q = ev.target.value; drawRegs(); });
+$("#rRegion").addEventListener("change", (ev) => { R2.region = ev.target.value; drawRegs(); });
+$("#rFood").addEventListener("change", (ev) => { R2.food = ev.target.value; drawRegs(); });
+$$(".rchip").forEach((b) => b.addEventListener("click", () => {
+  const k = b.dataset.f; R2[k] = !R2[k]; b.setAttribute("aria-pressed", String(R2[k])); drawRegs();
+}));
+$("#rReset").addEventListener("click", () => {
+  Object.assign(R2, {q: "", region: "", food: "", soon: false, relig: false, man: false, cert: false});
+  $("#rq").value = ""; $$(".rchip").forEach((b) => b.setAttribute("aria-pressed", "false")); renderRegs();
+});
+$("#regsModalLater").addEventListener("click", () => { $("#regsModal").hidden = true; });
+$("#regsModalGo").addEventListener("click", () => { $("#regsModal").hidden = true; showView("regs"); });
+
+/* ---------- 営業マニュアル（manual.bin、同じパスワードで復号）：本文は簡易 Markdown ----------
+   # 章 / ## 節 / ### 小見出し、- 箇条書き、1. 手順、- [ ] チェック項目、| 表 |、``` 例文 ```、
+   > [!point] / [!caution] / [!example] 囲み、> [!quiz] 確認問題（「答え：」から下は開くと見える）、**太字**、[文字](URL) */
+const MT = {
+  ja: {tabManual: "営業マニュアル", print: "印刷・PDF保存", toc: "目次", updated: "最終更新", reader: "読み手", purpose: "目的",
+       loading: "読み込み中…", answer: "答えを見る"},
+  zh: {tabManual: "营业手册", print: "打印 / 存为 PDF", toc: "目录", updated: "最后更新", reader: "读者", purpose: "目的",
+       loading: "加载中…", answer: "看答案"},
+};
+const M3 = {data: null, n: 0};
+const CJK3 = /[　-ヿ㐀-鿿＀-￯]/;
+const inline3 = (s) => esc2(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>")
+  .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1 ↗</a>');
+
+function md3(src) {
+  const lines = String(src || "").replace(/\r/g, "").split("\n"), out = [], toc = [], para = [];
+  const flush = () => {
+    if (!para.length) return;
+    out.push(`<p>${inline3(para.reduce((a, b) => (CJK3.test(a.slice(-1)) || CJK3.test(b[0]) ? a + b : a + " " + b)))}</p>`);
+    para.length = 0;
+  };
+  const cells = (r) => r.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+  let i = 0, m;
+  while (i < lines.length) {
+    const ln = lines[i];
+    if (!ln.trim()) { flush(); i++; continue; }
+    if ((m = ln.match(/^(#{1,3})\s+(.+)$/))) {
+      flush();
+      const lv = m[1].length, id = "mh" + (++M3.n);
+      if (lv <= 2) toc.push({lv, id, t: m[2]});
+      out.push(`<h${lv + 1} id="${id}" class="mh${lv}">${inline3(m[2])}</h${lv + 1}>`);
+      i++; continue;
+    }
+    if ((m = ln.match(/^::chart\s+(\w+)\s*$/))) {
+      flush(); out.push(`<figure class="mchart" data-chart="${esc2(m[1])}"></figure>`); i++; continue;
+    }
+    if (ln.trim() === "::steps") {                 // 手順の図：1行に「見出し | 説明」、::end まで
+      flush(); const st = []; i++;
+      while (i < lines.length && lines[i].trim() !== "::end") { if (lines[i].trim()) st.push(lines[i].split(" | ")); i++; }
+      i++;
+      out.push(`<ol class="msteps">${st.map(([h, d], k) => `<li><span class="sn">${k + 1}</span><b>${inline3(h)}</b>${d ? `<span>${inline3(d)}</span>` : ""}</li>`).join("")}</ol>`);
+      continue;
+    }
+    if (ln.startsWith("```")) {
+      flush(); const buf = []; i++;
+      while (i < lines.length && !lines[i].startsWith("```")) buf.push(lines[i++]);
+      i++; out.push(`<pre class="mpre">${esc2(buf.join("\n"))}</pre>`); continue;
+    }
+    if (ln.startsWith(">")) {
+      flush(); const buf = [];
+      while (i < lines.length && lines[i].startsWith(">") && !(buf.length && /^>\s?\[!\w+\]/.test(lines[i]))) {
+        buf.push(lines[i++].replace(/^>\s?/, ""));   // 下一个 "> [!…]" 是新的囲み
+      }
+      const km = buf[0].match(/^\[!(point|caution|example|quiz)\]\s*(.*)$/), kind = km ? km[1] : "note";
+      if (km) buf[0] = km[2];
+      if (kind === "quiz") {
+        let k = buf.findIndex((x) => /^(答え|答案)[:：]/.test(x)); if (k < 0) k = buf.length;
+        out.push(`<div class="mbox quiz">${md3(buf.slice(0, k).join("\n")).html}`
+          + `<details><summary>${esc2(MT[lang].answer)}</summary>${md3(buf.slice(k).join("\n")).html}</details></div>`);
+      } else out.push(`<div class="mbox ${kind}">${md3(buf.join("\n")).html}</div>`);
+      continue;
+    }
+    if (ln.trim().startsWith("|")) {
+      flush(); const rows = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) rows.push(lines[i++]);
+      const head = cells(rows[0]), body = rows.slice(/^[\s|:-]+$/.test(rows[1] || "") ? 2 : 1).map(cells);
+      out.push(`<div class="tw"><table class="mt"><thead><tr>${head.map((c) => `<th>${inline3(c)}</th>`).join("")}</tr></thead><tbody>`
+        + body.map((r) => `<tr>${r.map((c, j) => `<td data-l="${esc2(head[j] || "")}">${inline3(c)}</td>`).join("")}</tr>`).join("")
+        + "</tbody></table></div>");
+      continue;
+    }
+    if ((m = ln.match(/^\s*([-*]|\d+\.)\s+/))) {
+      flush(); const ordered = /\d/.test(m[1]), items = [];
+      while (i < lines.length && (m = lines[i].match(/^\s*([-*]|\d+\.)\s+(.*)$/)) && /\d/.test(m[1]) === ordered) { items.push(m[2]); i++; }
+      const tag = ordered ? "ol" : "ul";
+      out.push(`<${tag} class="ml">${items.map((t) => {
+        const c = t.match(/^\[( |x)\]\s+(.*)$/);
+        return c ? `<li class="ck"><span class="box">${c[1] === "x" ? "☑" : "☐"}</span>${inline3(c[2])}</li>` : `<li>${inline3(t)}</li>`;
+      }).join("")}</${tag}>`);
+      continue;
+    }
+    para.push(ln.trim()); i++;
+  }
+  flush();
+  return {html: out.join(""), toc};
+}
+
+async function loadManual(password) {
+  try {
+    const res = await fetch("manual.bin?v=" + Date.now(), {cache: "no-store"});
+    if (!res.ok) throw new Error("none");
+    M3.data = await decrypt(await res.arrayBuffer(), password);
+  } catch (e) { if (R2.view === "manual") showView("leads"); return; }
+  $("#tabManual").hidden = !(M3.data.manuals || []).length;
+  if (R2.view === "manual") renderManual();
+}
+
+function renderManual() {
+  applyText();
+  const L3 = MT[lang], m = (M3.data?.manuals || [])[0], doc = m && (m[lang] || m.ja);
+  if (!doc) { $("#mDoc").innerHTML = `<div class="empty">${esc2(L3.loading)}</div>`; $("#mToc").innerHTML = ""; return; }
+  M3.n = 0;
+  const r = md3(doc.md);
+  const chips = [[L3.reader, doc.reader], [L3.purpose, doc.purpose], [L3.updated, M3.data.updated]].filter((x) => x[1]);
+  $("#mTitle").textContent = doc.title || L3.tabManual;
+  $("#mTake").innerHTML = inline3(doc.take || "");
+  $("#mMeta").innerHTML = chips.map(([k, v]) => `<span class="mchip">${esc2(k)}：${esc2(v)}</span>`).join("")
+    + `<button type="button" class="hbtn mprint" id="mPrint">${esc2(L3.print)}</button>`;
+  $("#mPrint").onclick = () => window.print();
+  $("#mDoc").innerHTML = `<header class="mcover"><h1>${esc2(doc.title || "")}</h1><div>${chips.map(([k, v]) => `${esc2(k)}：${esc2(v)}`).join("　/　")}</div></header>` + r.html;
+  $("#mToc").innerHTML = `<div class="mtoc-h">${esc2(L3.toc)}</div>`
+    + r.toc.map((t) => `<a href="#${t.id}" class="t${t.lv}">${inline3(t.t)}</a>`).join("");
+  drawCharts(m.charts || {});
+}
+
+/* 図表（::chart id）：line＝折れ線（年×国）、stack＝積み上げ縦棒。ホバー／キーボードで年ごとの値、下に表。
+   ラベル類は textContent で入れる（データ由来の文字列を HTML として扱わない） */
+const LT3 = (o) => (o ? (o[lang] || o.ja || "") : "");
+const nf3 = (v, d = 2) => (v == null ? "—" : Number(v).toLocaleString(lang === "zh" ? "zh-CN" : "ja-JP",
+  {minimumFractionDigits: d, maximumFractionDigits: d}));
+const mk3 = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const sv3 = (tag, attrs, parent) => {
+  const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const nice3 = (v) => { if (!(v > 0)) return 1; const p = 10 ** Math.floor(Math.log10(v)); return [1, 2, 2.5, 5, 10].find((k) => k * p >= v) * p; };
+const iwGuess = (n) => (680 - 46 - 12) / n - 6;        // 1 本あたりの横幅（ラベルが入るかの目安）
+
+function drawCharts(specs) {
+  $$("#mDoc .mchart").forEach((fig) => {
+    const c = specs[fig.dataset.chart];
+    if (!c) { fig.remove(); return; }
+    fig.replaceChildren();
+    if (c.type === "timeline") { drawTimeline(fig, c); return; }
+    const col = (s, i) => `var(--c${(s.slots && i != null ? s.slots[i] : s.slot) || 0})`, stack = c.type === "stack", xs = c.x, n = xs.length;
+    const cap = mk3("figcaption"); cap.append(mk3("div", "mct", LT3(c.title)), mk3("div", "mcu", LT3(c.unit))); fig.append(cap);
+    if (c.series.length > 1) {
+      const lg = mk3("div", "mlg");
+      for (const s of c.series) { const it = mk3("span"), k = mk3("i", stack ? "kb" : "kl"); k.style.background = col(s); it.append(k, LT3(s.name)); lg.append(it); }
+      fig.append(lg);
+    }
+    const xlab = (v) => (v && typeof v === "object" ? LT3(v) : String(v));      // 横軸のラベル（年、または日中の名前）
+    const rot = xs.some((v) => xlab(v).length * 11 > iwGuess(n));             // 入らないラベルは斜めに
+    const W = 680, H = rot ? 340 : 290, P = {l: 46, r: stack ? 12 : 104, t: 14, b: rot ? 84 : 28}, iw = W - P.l - P.r, ih = H - P.t - P.b, band = iw / n;
+    const tot = xs.map((_, i) => (stack ? c.series.reduce((a, s) => a + (s.data[i] || 0), 0) : Math.max(0, ...c.series.map((s) => s.data[i] || 0))));
+    const step = nice3(Math.max(...tot) * 1.04 / 4), nt = Math.max(1, Math.ceil(Math.max(...tot) * 1.04 / step));
+    const ymax = step * nt, y = (v) => P.t + ih - (v / ymax) * ih, x = (i) => P.l + band * (i + 0.5);
+    const td3 = step >= 1 ? 0 : step >= 0.1 ? 1 : 2;      // 刻み幅に合わせた小数桁（0 / 10 / 20 / 30）
+    const svg = sv3("svg", {viewBox: `0 0 ${W} ${H}`, class: "msvg", role: "img", "aria-label": LT3(c.title), tabindex: "0"});
+    for (let k = 0; k <= nt; k++) {
+      const v = step * k, yy = y(v);
+      sv3("line", {x1: P.l, x2: W - P.r, y1: yy, y2: yy, class: k ? "mg" : "mb"}, svg);
+      sv3("text", {x: P.l - 7, y: yy + 4, class: "mtk", "text-anchor": "end"}, svg).textContent = nf3(v, td3);
+    }
+    xs.forEach((xv, i) => {
+      const yy = P.t + ih + 16;
+      sv3("text", rot ? {x: x(i), y: yy, class: "mtk", "text-anchor": "end", transform: `rotate(-35 ${x(i)} ${yy})`}
+                      : {x: x(i), y: H - 8, class: "mtk", "text-anchor": "middle"}, svg).textContent = xlab(xv);
+    });
+    const marks = [];
+    if (stack) {
+      const bw = Math.min(24, band * 0.62);
+      xs.forEach((_, i) => {
+        let base = 0; const g = sv3("g", {}, svg); marks.push(g);
+        const top = c.series.reduce((t, s, j) => ((s.data[i] || 0) > 0 ? j : t), -1);
+        c.series.forEach((s, j) => {
+          const v = s.data[i] || 0; if (v <= 0) return;
+          const y0 = y(base), y1 = y(base + v), h = Math.max(0, y0 - y1 - (j === top ? 0 : 2)), x0 = x(i) - bw / 2;
+          if (j === top && h > 1) {
+            const r = Math.min(4, h / 2), yt = y0 - h;
+            sv3("path", {d: `M${x0},${y0}V${yt + r}Q${x0},${yt} ${x0 + r},${yt}H${x0 + bw - r}Q${x0 + bw},${yt} ${x0 + bw},${yt + r}V${y0}Z`, fill: col(s, i)}, g);
+          } else if (h > 0.5) sv3("rect", {x: x0, y: y0 - h, width: bw, height: h, fill: col(s, i)}, g);
+          if (c.series.length === 1 && h > 1)        // 1 系列の棒は先端に値（棒の外側）
+            sv3("text", {x: x(i), y: y0 - h - 6, class: "mlab", "text-anchor": "middle"}, g).textContent = nf3(v, 1);
+          base += v;
+        });
+      });
+    } else {
+      const ends = [];
+      for (const s of c.series) {
+        let d = "", last = -1;
+        s.data.forEach((v, i) => { if (v == null) { last = -1; return; } d += `${last === i - 1 && d ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`; last = i; });
+        sv3("path", {d, class: "mln", stroke: col(s)}, svg);
+        const li = s.data.reduce((t, v, i) => (v == null ? t : i), -1);
+        if (li >= 0) { sv3("circle", {cx: x(li), cy: y(s.data[li]), r: 4, fill: col(s), class: "mdot"}, svg); ends.push({s, li, yy: y(s.data[li])}); }
+      }
+      ends.sort((a, b) => a.yy - b.yy);
+      const clash = ends.some((e, k) => k && e.yy - ends[k - 1].yy < 15);
+      if (!clash && ends.length <= 4) for (const e of ends) {
+        sv3("text", {x: x(e.li) + 9, y: e.yy + 4, class: "mlab"}, svg).textContent = `${LT3(e.s.name)} ${nf3(e.s.data[e.li], 1)}`;
+      }
+    }
+    const xl = sv3("line", {y1: P.t, y2: P.t + ih, class: "mx", visibility: "hidden"}, svg);
+    const hit = sv3("rect", {x: P.l, y: P.t, width: iw, height: ih, fill: "transparent"}, svg);
+    const tip = mk3("div", "mtip"); tip.hidden = true;
+    let cur = -1;
+    const show = (i) => {
+      cur = Math.max(0, Math.min(n - 1, i));
+      tip.replaceChildren(mk3("div", "ty", xlab(xs[cur])));
+      for (const s of [...c.series].reverse()) {
+        const row = mk3("div", "tr"), k = mk3("i"); k.style.background = col(s, cur);
+        row.append(k, mk3("b", null, nf3(s.data[cur])), LT3(s.name)); tip.append(row);
+      }
+      if (stack) { const row = mk3("div", "tr"); row.append(mk3("i"), mk3("b", null, nf3(tot[cur])), lang === "zh" ? "合计" : "合計"); tip.append(row); }
+      const rect = svg.getBoundingClientRect(), fr = fig.getBoundingClientRect(), sc = rect.width / W, px = rect.left - fr.left + x(cur) * sc;
+      tip.hidden = false;
+      tip.style.left = Math.min(fig.clientWidth - tip.offsetWidth - 8, Math.max(8, px + (px > fig.clientWidth / 2 ? -tip.offsetWidth - 14 : 14))) + "px";
+      tip.style.top = (rect.top - fr.top + P.t * sc + 6) + "px";
+      if (stack) marks.forEach((g, j) => g.classList.toggle("dim", j !== cur));
+      else { xl.setAttribute("x1", x(cur)); xl.setAttribute("x2", x(cur)); xl.setAttribute("visibility", "visible"); }
+    };
+    const hide = () => { tip.hidden = true; xl.setAttribute("visibility", "hidden"); marks.forEach((g) => g.classList.remove("dim")); };
+    const at = (ev) => { const r = svg.getBoundingClientRect(); return Math.floor(((ev.clientX - r.left) / r.width * W - P.l) / band); };
+    hit.addEventListener("pointermove", (ev) => show(at(ev)));
+    hit.addEventListener("pointerleave", hide);
+    svg.addEventListener("focus", () => show(cur < 0 ? n - 1 : cur));
+    svg.addEventListener("blur", hide);
+    svg.addEventListener("keydown", (ev) => {
+      if (ev.key === "ArrowLeft" || ev.key === "ArrowRight") { ev.preventDefault(); show(cur + (ev.key === "ArrowLeft" ? -1 : 1)); }
+    });
+    fig.append(svg, tip);
+    if (c.note) fig.append(mk3("div", "mcn", LT3(c.note)));
+    const src = mk3("div", "mcs", LT3(c.source) + " ");
+    for (const l of c.links || []) if (/^https?:\/\//.test(l.url)) {
+      const a = mk3("a", null, `${l.title} ↗`); a.href = l.url; a.target = "_blank"; a.rel = "noopener noreferrer"; src.append(a);
+    }
+    fig.append(src);
+    const det = mk3("details", "mtbl"), tw = mk3("div", "tw"), tb = mk3("table", "mt"), hr = mk3("tr");
+    det.append(mk3("summary", null, lang === "zh" ? "看数据表" : "データを表で見る"));
+    hr.append(mk3("th", null, lang === "zh" ? "年" : "年"), ...c.series.map((s) => mk3("th", null, LT3(s.name))));
+    if (stack) hr.append(mk3("th", null, lang === "zh" ? "合计" : "合計"));
+    const th = mk3("thead"); th.append(hr); const bd = mk3("tbody");
+    xs.forEach((xv, i) => {
+      const tr = mk3("tr"); tr.append(mk3("td", null, xlab(xv)));
+      c.series.forEach((s) => { const td = mk3("td", null, nf3(s.data[i])); td.dataset.l = LT3(s.name); tr.append(td); });
+      if (stack) { const td = mk3("td", null, nf3(tot[i])); td.dataset.l = lang === "zh" ? "合计" : "合計"; tr.append(td); }
+      bd.append(tr);
+    });
+    tb.append(th, bd); tw.append(tb); det.append(tw); fig.append(det);
+  });
+}
+window.addEventListener("beforeprint", () => $$("#mDoc details").forEach((d) => { d.open = true; }));
+
+/* 営業カレンダー（timeline）：行＝項目、横＝月。各期間は棒、ホバーで内容と日付、下に表 */
+function drawTimeline(fig, c) {
+  const t0 = Date.parse(c.start), t1 = Date.parse(c.end), W = 680, L = 150, R = 10, top = 26, rh = 34;
+  const H = top + rh * c.tracks.length + 8, iw = W - L - R, xt = (d) => L + ((Date.parse(d) - t0) / (t1 - t0)) * iw;
+  const cap = mk3("figcaption"); cap.append(mk3("div", "mct", LT3(c.title)), mk3("div", "mcu", LT3(c.unit))); fig.append(cap);
+  const svg = sv3("svg", {viewBox: `0 0 ${W} ${H}`, class: "msvg", role: "img", "aria-label": LT3(c.title)});
+  const d = new Date(t0);
+  for (d.setDate(1); d.getTime() <= t1; d.setMonth(d.getMonth() + 1)) {
+    const x = xt(d.toISOString().slice(0, 10)), mo = d.getMonth() + 1;
+    if (x < L - 1) continue;
+    sv3("line", {x1: x, x2: x, y1: top - 6, y2: H - 6, class: "mg"}, svg);
+    sv3("text", {x: x + 3, y: top - 10, class: "mtk"}, svg).textContent = mo === 1 || d.getTime() === t0 ? `${d.getFullYear()}/${mo}` : `${mo}`;
+  }
+  const tip = mk3("div", "mtip"); tip.hidden = true;
+  c.tracks.forEach((tr, k) => {
+    const y = top + rh * k;
+    sv3("text", {x: 0, y: y + rh / 2 + 4, class: "mtrk"}, svg).textContent = LT3(tr.name);
+    for (const sp of tr.spans) {
+      const x0 = Math.max(L, xt(sp.from)), x1 = Math.min(W - R, xt(sp.to)), w = Math.max(4, x1 - x0);
+      const g = sv3("g", {class: "mspan"}, svg);
+      sv3("rect", {x: x0, y: y + 9, width: w, height: 16, rx: 4, fill: `var(--c${tr.slot || 0})`}, g);
+      const lab = LT3(sp.label), lw = lab.length * 11.5;
+      if (lab && lw < w - 8)                          // 棒の中に入るなら中（黄色の棒は黒文字）、入らなければ右側
+        sv3("text", {x: x0 + 6, y: y + 21, class: "mtl", fill: [4, 5].includes(tr.slot) ? "#0b0b0b" : "#fff"}, g).textContent = lab;
+      else if (lab && x0 + w + 4 + lw < W)
+        sv3("text", {x: x0 + w + 4, y: y + 21, class: "mtrk"}, g).textContent = lab;
+      g.addEventListener("pointermove", (ev) => {
+        tip.replaceChildren(mk3("div", "ty", LT3(tr.name)), mk3("div", null, lab), mk3("div", "ty", `${sp.from} – ${sp.to}`));
+        const fr = fig.getBoundingClientRect(); tip.hidden = false;
+        tip.style.left = Math.min(fig.clientWidth - tip.offsetWidth - 8, ev.clientX - fr.left + 12) + "px";
+        tip.style.top = (ev.clientY - fr.top + 12) + "px";
+      });
+      g.addEventListener("pointerleave", () => { tip.hidden = true; });
+    }
+  });
+  fig.append(svg, tip);
+  if (c.note) fig.append(mk3("div", "mcn", LT3(c.note)));
+  const src = mk3("div", "mcs", LT3(c.source) + " ");
+  for (const l of c.links || []) if (/^https?:\/\//.test(l.url)) {
+    const a = mk3("a", null, `${l.title} ↗`); a.href = l.url; a.target = "_blank"; a.rel = "noopener noreferrer"; src.append(a, " ");
+  }
+  fig.append(src);
+  const det = mk3("details", "mtbl"), tw = mk3("div", "tw"), tb = mk3("table", "mt"), hr = mk3("tr"), bd = mk3("tbody");
+  det.append(mk3("summary", null, lang === "zh" ? "看数据表" : "データを表で見る"));
+  hr.append(...(lang === "zh" ? ["项目", "内容", "时间"] : ["項目", "内容", "期間"]).map((h) => mk3("th", null, h)));
+  for (const tr of c.tracks) for (const sp of tr.spans) {
+    const row = mk3("tr"); row.append(mk3("td", null, LT3(tr.name)), mk3("td", null, LT3(sp.label)), mk3("td", null, `${sp.from} – ${sp.to}`)); bd.append(row);
+  }
+  const th = mk3("thead"); th.append(hr); tb.append(th, bd); tw.append(tb); det.append(tw); fig.append(det);
+}
+
+applyText();
+let saved = null;
+try { saved = sessionStorage.getItem("pw"); } catch (e) {}
+if (saved) unlock(saved); else $("#pw").focus();
+</script>
+</body>
+</html>
